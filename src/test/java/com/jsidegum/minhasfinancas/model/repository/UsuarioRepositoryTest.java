@@ -14,10 +14,10 @@ import com.jsidegum.minhasfinancas.model.entity.Usuario;
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 public class UsuarioRepositoryTest {
-
+	
 	@Autowired
 	UsuarioRepository repository;
-
+	
 	@Test
 	public void deveVerificarAExistenciaDeUmEmail() {
 		Usuario usuario = Usuario.builder().nome("John Doe").email("johndoe@email.com").build();
