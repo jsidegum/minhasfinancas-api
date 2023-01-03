@@ -24,7 +24,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	@Override
 	public Usuario autenticar(String email, String senha) {
+		
 		Optional<Usuario> usuario = repository.findByEmail(email);
+		
 		if (!usuario.isPresent()) {
 			throw new ErroAutenticacao("Usuário não encontrado para o email informado.");	
 		}	
