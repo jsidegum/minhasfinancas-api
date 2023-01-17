@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -69,14 +70,14 @@ public class UsuarioRepositoryTest {
 		
 		Assertions.assertThat(result.isPresent()).isFalse();
 		
-	}
+	}	
 	
 	public static Usuario criarUsuario() {
 		return Usuario
 				.builder()
 				.nome("John Doe")
 				.email("johndoe@email.com")
-				.senha("senha123")
+				.senha("password123")
 				.build();
 	}
 	
