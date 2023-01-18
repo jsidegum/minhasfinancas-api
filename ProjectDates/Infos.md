@@ -8,10 +8,13 @@ C:\Program Files\PostgreSQL\9.4\bin\pgAdmin3.exe
 
 # Annotations
 @Autowired
-Do String Boot, Injeta as instancias
+Do Spring Boot, Injeta as instancias
 
 @Transactional
-Do String Boot, cria na base de dados uma transação, executa e commita;
+Do Spring Boot, cria na base de dados uma transação, executa e commita;
+
+@Transactional(readOnly = true)
+Do Spring Boot, "readOnly = true" transação apenas de leitura, dessa forma o Spring Boot consegue otimizar nossa consulta.
 
 @DataJpaTest 
 Cria uma instancia do banco de dados em memória e ao finalizar os testes a instancia é deletada da memória.
