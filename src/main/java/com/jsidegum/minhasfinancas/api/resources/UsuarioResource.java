@@ -13,15 +13,20 @@ import com.jsidegum.minhasfinancas.exception.ErroAutenticacao;
 import com.jsidegum.minhasfinancas.model.entity.Usuario;
 import com.jsidegum.minhasfinancas.service.UsuarioService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/usuarios")
+@RequiredArgsConstructor
 public class UsuarioResource {
 
-	private UsuarioService service;
+	private final UsuarioService service;
 	
+	/*
 	public UsuarioResource(UsuarioService service) {
 		this.service = service;
 	}
+	*/
 	
 	@PostMapping("/autenticar")
 	public ResponseEntity autenticar (@RequestBody UsuarioDTO dto) {
