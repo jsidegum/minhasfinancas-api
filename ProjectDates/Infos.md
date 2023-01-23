@@ -30,3 +30,10 @@ Do JUnit, Roda antes de cada chamada de qualquer outro metodo @Test da classe;
 # Classes nativas
 TestEntityManager
 Responsavel por persistir os dados, utilizado para Test
+
+# Dependencias (pom.xml)
+
+spring-boot-devtools 
+Hot deploy, nao precisa parar e rodar novamente apos alguma mudança no fonte.
+
+
