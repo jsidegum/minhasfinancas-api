@@ -2,6 +2,9 @@ package com.jsidegum.minhasfinancas.model.repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -39,15 +42,43 @@ public class LancamentoRepositoryTest {
 	
 	@Test
 	public void deveDeletarUmLancamento() {
-		Lancamento lancamento = criarLancamento();
-		entityManager.persist(lancamento);
+		Lancamento lancamento = criarEPersistirUmLancamento();
 		lancamento = entityManager.find(Lancamento.class, lancamento.getId());
 		repository.delete(lancamento);
 		Lancamento lancamentoInexistente = entityManager.find(Lancamento.class, lancamento.getId());
 		Assertions.assertThat(lancamentoInexistente).isNull();
 	}
 	
-	public static Lancamento criarLancamento() {
+	@Test
+	public void deveAtualizarUmLancamento() {
+		Lancamento lancamento = criarEPersistirUmLancamento();
+		
+		lancamento.setAno(2022);
+		lancamento.setDescricao("Teste Atualizar");
+		lancamento.setStatus(StatusLancamento.CANCELADO);
+		
+		repository.save(lancamento);		
+		Lancamento lancamentoAtualizado = entityManager.find(Lancamento.class, lancamento.getId());
+		
+		Assertions.assertThat(lancamentoAtualizado.getAno()).isEqualTo(2022);
+		Assertions.assertThat(lancamentoAtualizado.getDescricao()).isEqualTo("Teste Atualizar");
+		Assertions.assertThat(lancamentoAtualizado.getStatus()).isEqualTo(StatusLancamento.CANCELADO);
+	}
+	
+	@Test
+	public void deveBuscarUmLancamentoPorId() {
+		Lancamento lancamento = criarEPersistirUmLancamento();
+		Optional<Lancamento> lancamentoEncontrado = repository.findById(lancamento.getId());
+		Assertions.assertThat(lancamentoEncontrado.isPresent()).isTrue();
+	}
+	
+	public Lancamento criarEPersistirUmLancamento() {
+		Lancamento lancamento = criarLancamento();
+		entityManager.persist(lancamento);
+		return lancamento;
+	}
+	
+	public Lancamento criarLancamento() {
 		return Lancamento
 				.builder()
 				.ano(2023)
