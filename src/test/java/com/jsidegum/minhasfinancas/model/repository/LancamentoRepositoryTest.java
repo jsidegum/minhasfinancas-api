@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.jsidegum.minhasfinancas.model.entity.Lancamento;
-import com.jsidegum.minhasfinancas.model.entity.Usuario;
 import com.jsidegum.minhasfinancas.model.enums.StatusLancamento;
 import com.jsidegum.minhasfinancas.model.enums.TipoLancamento;
 
@@ -78,7 +75,7 @@ public class LancamentoRepositoryTest {
 		return lancamento;
 	}
 	
-	public Lancamento criarLancamento() {
+	public static Lancamento criarLancamento() {
 		return Lancamento
 				.builder()
 				.ano(2023)
