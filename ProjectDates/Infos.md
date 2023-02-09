@@ -27,6 +27,10 @@ Ou seja, segue o que esta em "application-test.properties".
 @Before
 Do JUnit, Roda antes de cada chamada de qualquer outro metodo @Test da classe;
 
+@WebMvcTest
+org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+SUbir o contexto REST para teste
+
 # Classes nativas
 TestEntityManager
 Responsavel por persistir os dados, utilizado para Test
