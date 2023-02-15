@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsidegum.minhasfinancas.api.dto.UsuarioDTO;
 import com.jsidegum.minhasfinancas.api.resources.UsuarioResource;
 import com.jsidegum.minhasfinancas.exception.ErroAutenticacao;
+import com.jsidegum.minhasfinancas.exception.RegraNegocioException;
 import com.jsidegum.minhasfinancas.model.entity.Usuario;
 import com.jsidegum.minhasfinancas.service.LancamentoService;
 import com.jsidegum.minhasfinancas.service.UsuarioService;
@@ -86,6 +87,54 @@ public class UsuarioResourceTest {
 				.content(json);
 		
 
+		mvc.perform(request)
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	
+	}
+	
+	
+	@Test
+	public void deveCriarUmNovoUsuario() throws Exception{
+		//cenario
+		String email = "johndoe@email.com";
+		String senha = "password123";
+
+		UsuarioDTO dto = UsuarioDTO.builder().email(email).senha(senha).build();
+		Usuario usuario = Usuario.builder().id(1l).email(email).senha(senha).build();
+		Mockito.when(service.salvarUsuario(Mockito.any(Usuario.class))).thenReturn(usuario);
+		String json = new ObjectMapper().writeValueAsString(dto);
+
+		//execucao e verificao
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(API)
+				.accept(JSON)
+				.contentType(JSON)
+				.content(json);
+		
+		mvc.perform(request)
+		.andExpect(MockMvcResultMatchers.status().isCreated())
+		.andExpect(MockMvcResultMatchers.jsonPath("id").value(usuario.getId()))
+		.andExpect(MockMvcResultMatchers.jsonPath("nome").value(usuario.getNome()))
+		.andExpect(MockMvcResultMatchers.jsonPath("email").value(usuario.getEmail()));
+	
+	}
+	
+	
+	@Test
+	public void deveRetornarBadRequestAoTentarCriarUmUsuarioInvalido() throws Exception{
+		//cenario
+		String email = "johndoe@email.com";
+		String senha = "password123";
+
+		UsuarioDTO dto = UsuarioDTO.builder().email(email).senha(senha).build();
+		Mockito.when(service.salvarUsuario(Mockito.any(Usuario.class))).thenThrow(RegraNegocioException.class);
+		String json = new ObjectMapper().writeValueAsString(dto);
+
+		//execucao e verificao
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(API)
+				.accept(JSON)
+				.contentType(JSON)
+				.content(json);
+		
 		mvc.perform(request)
 		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	
