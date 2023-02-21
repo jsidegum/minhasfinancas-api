@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Card from '../components/card'
 import FormGroup from '../components/form-group'
 
-class Login extends React.Component {
+class Login extends Component {
 
     state = {
         email: '',
