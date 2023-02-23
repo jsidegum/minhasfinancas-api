@@ -21,7 +21,7 @@ class Navbar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav">
-                            <NavbarItem label="Home" href="#/" />
+                            <NavbarItem label="Home" href="#/home" />
                             <NavbarItem label="Usuários" href="#/cadastro-usuarios" />
                             <NavbarItem label="Lançamentos" href="#/" />
                             <NavbarItem label="Login" href="#/login" />
