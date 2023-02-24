@@ -23,9 +23,10 @@ class Login extends Component {
                         email: this.state.email,
                         senha: this.state.senha
                     }).then(response => {
-                        console.log(response)
+                        //console.log(response)
+                        this.props.history.push('/home')
                     }).catch(erro => {
-                        console.log(erro.response)
+                        alert(erro.response.data)
                     })
         }
     }
