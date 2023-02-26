@@ -23,7 +23,7 @@ class Login extends Component {
                         email: this.state.email,
                         senha: this.state.senha
                     }).then(response => {
-                        //console.log(response)
+                        localStorage.setItem('_usuario_logado', JSON.stringify(response.data));
                         this.props.history.push('/home')
                     }).catch(erro => {
                         alert(erro.response.data)
