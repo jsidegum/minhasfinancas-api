@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Card from '../components/card'
 import FormGroup from '../components/form-group'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios';
+import UsuarioService from '../app/service/usuarioService'
 
 class Login extends Component {
 
@@ -11,23 +11,27 @@ class Login extends Component {
         senha: ''
     }
 
+    constructor() {
+        super();
+        this.service = new UsuarioService();
+    }
+
     entrar = () => {
         if (this.state.email === '' || this.state.senha === '') {
             alert('Por favor entre com seu email e senha')
         } else {
-            // console.log('Email ' + this.state.email)
-            // console.log('Senha ' + this.state.senha)
-            axios
-                .post('http://localhost:8080/api/usuarios/autenticar',
-                    {
-                        email: this.state.email,
-                        senha: this.state.senha
-                    }).then(response => {
-                        localStorage.setItem('_usuario_logado', JSON.stringify(response.data));
-                        this.props.history.push('/home')
-                    }).catch(erro => {
-                        alert(erro.response.data)
-                    })
+            this.service.autenticar
+                ({
+                    email: this.state.email,
+                    senha: this.state.senha
+                })
+                .then(response => {
+                    localStorage.setItem('_usuario_logado', JSON.stringify(response.data));
+                    this.props.history.push('/home')
+                }).catch(erro => {
+                    console.log(erro.response.data)
+                    this.setState({ mensagemErro: erro.response.data })
+                })
         }
     }
 
