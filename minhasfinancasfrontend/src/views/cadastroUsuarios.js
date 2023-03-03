@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../components/card'
 import FormGroup from '../components/form-group'
 import { withRouter } from 'react-router-dom'
+import UsuarioService from '../app/service/usuarioService';
 
 class CadastroUsuario extends React.Component {
 
@@ -12,42 +13,59 @@ class CadastroUsuario extends React.Component {
         senhaRepeticao: ''
     }
 
-    cancelar = () => {
-        this.props.history.push('/login')
+    constructor() {
+        super();
+        this.serviceSalvar = new UsuarioService();
+    }
+
+    validar() {
+        const msgs = [];
+
+        if (!this.state.nome) {
+            msgs.push('Por favor entre com seu nome');
+        }
+        if (!this.state.email) {
+            msgs.push('Por favor entre com seu email');
+        } else if (!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)) {
+            msgs.push('Por favor entre com um email válido');
+        }
+        if (!this.state.senha) {
+            msgs.push('Por favor entre com sua senha');
+        }
+        if (this.state.senha !== this.state.senhaRepeticao) {
+            msgs.push('As senhas não conferem');
+        }
+        if (msgs.length > 0) {
+            alert(msgs.join('\n'));
+            return false;
+        } else {
+            return true;
+        }
     }
 
     cadastrar = () => {
-        if (this.state.senha === this.state.senhaRepeticao) {
-            if (this.state.nome !== '' && this.state.email !== '' && this.state.senha !== '') {
-                // fetch('http://localhost:3000/usuarios', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Accept': 'application/json',
-                //         'Content-Type': 'application/json'
-                //     },
-                //     body: JSON.stringify({
-                //         nome: this.state.nome,
-                //         email: this.state.email,
-                //         senha: this.state.senha
-                //     })
-                // })
-                //     .then(resposta => resposta.json())
-                //     .then(resposta => {
-                //         if (resposta.sucesso) {
-                //             this.props.history.push('/login')
-                //         } else {
-                //             alert(resposta.mensagem)
-                //         }
-                //     })
-                console.log(this.state);
+
+        if (this.validar()) {
+
+            const usuario = {
+                nome: this.state.nome,
+                email: this.state.email,
+                senha: this.state.senha
             }
-            else {
-                alert('Por favor entre com seu nome, email e senha')
-            }
+
+
+            this.serviceSalvar.salvar(usuario)
+                .then(response => {
+                    alert('Usuário cadastrado com sucesso!')
+                    this.props.history.push('/login');
+                }).catch(erro => {
+                    alert(erro.response.data)
+                })
         }
-        else {
-            alert('As senhas não conferem')
-        }
+    }
+
+    cancelar = () => {
+        this.props.history.push('/login');
     }
 
     render() {

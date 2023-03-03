@@ -30,8 +30,7 @@ class Login extends Component {
                     LocalStorageService.adicionarItem('_usuario_logado', response.data)
                     this.props.history.push('/home')
                 }).catch(erro => {
-                    console.log(erro.response.data)
-                    this.setState({ mensagemErro: erro.response.data })
+                    alert(erro.response.data)
                 })
         }
     }
