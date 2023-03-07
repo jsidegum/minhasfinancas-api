@@ -23,7 +23,7 @@ class Navbar extends Component {
                         <ul className="navbar-nav">
                             <NavbarItem label="Home" href="#/home" />
                             <NavbarItem label="Usuários" href="#/cadastro-usuarios" />
-                            <NavbarItem label="Lançamentos" href="#/" />
+                            <NavbarItem label="Lançamentos" href="#/lancamentos" />
                             <NavbarItem label="Login" href="#/login" />
                         </ul>
 

@@ -4,6 +4,7 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 
 import CadastroUsuario from '../views/cadastroUsuarios';
 import Home from '../views/home';
+import ConsultaLancamentos from '../views/consulta-lancamentos';
 import Login from '../views/login';
 
 
@@ -15,6 +16,7 @@ class Rotas extends Component {
                     <Route path="/home" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/cadastro-usuarios" component={CadastroUsuario} />
+                    <Route path="/lancamentos" component={ConsultaLancamentos} />
                 </Switch>
             </HashRouter >
         )
