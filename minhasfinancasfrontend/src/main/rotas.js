@@ -4,7 +4,7 @@ import { Route, Switch, HashRouter } from 'react-router-dom';
 
 import CadastroUsuario from '../views/cadastroUsuarios';
 import Home from '../views/home';
-import ConsultaLancamentos from '../views/consulta-lancamentos';
+import ConsultaLancamentos from '../views/lancamentos/consulta-lancamentos';
 import Login from '../views/login';
 
 

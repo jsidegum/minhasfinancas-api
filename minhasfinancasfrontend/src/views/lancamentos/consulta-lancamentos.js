@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import Card from '../components/card'
-import FormGroup from '../components/form-group'
-import SelectMenu from '../components/selectMenu';
+import Card from '../../components/card'
+import FormGroup from '../../components/form-group'
+import SelectMenu from '../../components/selectMenu';
+import LancamentoTable from './lancamentoTable';
 
 
 class ConsultaLancamentos extends Component {
 
+    // http://localhost:8080/api/lancamentos?usuario=9&descricao=pagamen&mes=1&ano=2023
     state = {
+        "usuario": null,
         "descricao": '',
         "mes": null,
-        "ano": null,
-        "usuario": null,
-        "tipo": ''
+        "ano": null
     }
 
-
-
-
     render() {
-
         const meses = [
             { label: 'Selecione...', value: '' },
             { label: 'Janeiro', value: 1 },
@@ -42,12 +39,23 @@ class ConsultaLancamentos extends Component {
             { label: 'Despesa', value: 'DESPESA' }
         ]
 
+        const lancamentos = [
+            {
+                id: 1,
+                descricao: "Salário",
+                valor: 200,
+                tipo: "Receita",
+                mes: 1,
+                status: "Pendente"
+            }
+        ]
+
         return (
             <>
-                <div className="row">
-                    <div className="col-lg-6">
-                        <div className="bs-component">
-                            <Card title="Busca Lançamento">
+                <Card title="Busca Lançamento">
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <div className="bs-component">
                                 <FormGroup label="Ano: *" htmlFor="inputAno">
                                     <input
                                         type="text"
@@ -66,15 +74,28 @@ class ConsultaLancamentos extends Component {
                                 <FormGroup label="Tipo de Lançamento:" htmlFor="inputTipo">
                                     <SelectMenu id="inputMes" lista={tipo} />
                                 </FormGroup>
+                                <button type="button" className="btn btn-success">Buscar</button>
+                                <button type="button" className="btn btn-danger">Cadastrar</button>
 
-                            </Card>
-
+                            </div>
                         </div>
-
                     </div>
 
-                </div>
+                    <div>
+                        <div className="col-lg-12">
 
+                            <div className="page-header">
+                                <h1 id="tables"></h1>
+                            </div>
+
+                            <div className="bs-component">
+                                <LancamentoTable lancamento={lancamentos} />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </Card>
             </>
         )
 
