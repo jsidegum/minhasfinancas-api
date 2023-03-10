@@ -10,6 +10,7 @@ class LancamentoTable extends Component {
                     <td>{lanc.descricao}</td>
                     <td>{lanc.valor}</td>
                     <td>{lanc.tipo}</td>
+                    <td>{lanc.ano}</td>
                     <td>{lanc.mes}</td>
                     <td>{lanc.status}</td>
                     <td>
@@ -19,7 +20,6 @@ class LancamentoTable extends Component {
 
                 </tr>
             )
-
         })
 
         return (
@@ -29,6 +29,7 @@ class LancamentoTable extends Component {
                         <th scope="col">Descrição</th>
                         <th scope="col">Valor</th>
                         <th scope="col">Tipo</th>
+                        <th scope="col">Ano</th>
                         <th scope="col">Mês</th>
                         <th scope="col">Situação</th>
                         <th scope="col">Ações</th>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import LancamentoService from '../../app/service/lancamentoService';
+import LocalStorageService from '../../app/service/localstorageService';
 import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
 import SelectMenu from '../../components/selectMenu';
@@ -10,10 +12,36 @@ class ConsultaLancamentos extends Component {
 
     // http://localhost:8080/api/lancamentos?usuario=9&descricao=pagamen&mes=1&ano=2023
     state = {
-        "usuario": null,
-        "descricao": '',
-        "mes": null,
-        "ano": null
+        descricao: '',
+        mes: '',
+        ano: '',
+        tipo: '',
+        lancamentos: []
+    }
+
+    constructor() {
+        super();
+        this.service = new LancamentoService;
+    }
+
+    buscar = () => {
+
+        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
+
+        const lancamentoFiltro = {
+            usuario: usuarioLogado.id,
+            descricao: this.state.descricao,
+            mes: this.state.mes,
+            ano: this.state.ano,
+            tipo: this.state.tipo,
+        }
+
+        this.service.buscar(lancamentoFiltro)
+            .then(response => {
+                this.setState({ lancamentos: response.data })
+            }).catch(error => {
+                alert(error.response.data)
+            })
     }
 
     render() {
@@ -39,24 +67,25 @@ class ConsultaLancamentos extends Component {
             { label: 'Despesa', value: 'DESPESA' }
         ]
 
-        const lancamentos = [
-            {
-                id: 1,
-                descricao: "Salário",
-                valor: 200,
-                tipo: "Receita",
-                mes: 1,
-                status: "Pendente"
-            }
-        ]
-
         return (
             <>
                 <Card title="Busca Lançamento">
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="bs-component">
-                                <FormGroup label="Ano: *" htmlFor="inputAno">
+
+                                <FormGroup label="Descrição:" htmlFor="inputDescricao">
+                                    <input
+                                        type="text"
+                                        value={this.state.descricao}
+                                        onChange={e => this.setState({ descricao: e.target.value })}
+                                        className="form-control"
+                                        id="exampleInputEmail1"
+                                        placeholder="Digite a Descrição"
+                                    />
+                                </FormGroup>
+
+                                <FormGroup label="Ano:" htmlFor="inputAno">
                                     <input
                                         type="text"
                                         value={this.state.ano}
@@ -67,14 +96,24 @@ class ConsultaLancamentos extends Component {
                                     />
                                 </FormGroup>
 
-                                <FormGroup label="Mês: *" htmlFor="inputMes">
-                                    <SelectMenu id="inputMes" lista={meses} />
+                                <FormGroup label="Mês:" htmlFor="inputMes">
+                                    <SelectMenu
+                                        id="inputMes"
+                                        lista={meses}
+                                        value={this.state.mes}
+                                        onChange={e => this.setState({ mes: e.target.value })}
+                                    />
                                 </FormGroup>
 
                                 <FormGroup label="Tipo de Lançamento:" htmlFor="inputTipo">
-                                    <SelectMenu id="inputMes" lista={tipo} />
+                                    <SelectMenu
+                                        id="inputMes"
+                                        lista={tipo}
+                                        value={this.state.tipo}
+                                        onChange={e => this.setState({ tipo: e.target.value })}
+                                    />
                                 </FormGroup>
-                                <button type="button" className="btn btn-success">Buscar</button>
+                                <button onClick={this.buscar} type="button" className="btn btn-success" >Buscar</button>
                                 <button type="button" className="btn btn-danger">Cadastrar</button>
 
                             </div>
@@ -89,7 +128,7 @@ class ConsultaLancamentos extends Component {
                             </div>
 
                             <div className="bs-component">
-                                <LancamentoTable lancamento={lancamentos} />
+                                <LancamentoTable lancamento={this.state.lancamentos} />
                             </div>
                         </div>
                     </div>
