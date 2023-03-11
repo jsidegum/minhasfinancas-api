@@ -8,7 +8,7 @@ class LancamentoTable extends Component {
             return (
                 <tr key={lanc.id}>
                     <td>{lanc.descricao}</td>
-                    <td>{lanc.valor}</td>
+                    <td>{lanc.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
                     <td>{lanc.tipo}</td>
                     <td>{lanc.ano}</td>
                     <td>{lanc.mes}</td>

@@ -26,46 +26,34 @@ class ConsultaLancamentos extends Component {
 
     buscar = () => {
 
-        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
+        if (this.state.ano) {
+            const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
 
-        const lancamentoFiltro = {
-            usuario: usuarioLogado.id,
-            descricao: this.state.descricao,
-            mes: this.state.mes,
-            ano: this.state.ano,
-            tipo: this.state.tipo,
+            const lancamentoFiltro = {
+                usuario: usuarioLogado.id,
+                descricao: this.state.descricao,
+                mes: this.state.mes,
+                ano: this.state.ano,
+                tipo: this.state.tipo,
+            }
+
+            this.service.buscar(lancamentoFiltro)
+                .then(response => {
+                    this.setState({ lancamentos: response.data })
+                }).catch(error => {
+                    alert(error.response.data)
+                })
+        } else {
+            alert('Campo Ano é obrigatório')
         }
 
-        this.service.buscar(lancamentoFiltro)
-            .then(response => {
-                this.setState({ lancamentos: response.data })
-            }).catch(error => {
-                alert(error.response.data)
-            })
     }
 
     render() {
-        const meses = [
-            { label: 'Selecione...', value: '' },
-            { label: 'Janeiro', value: 1 },
-            { label: 'Fevereiro', value: 2 },
-            { label: 'Março', value: 3 },
-            { label: 'Abril', value: 4 },
-            { label: 'Maio', value: 5 },
-            { label: 'Junho', value: 6 },
-            { label: 'Julho', value: 7 },
-            { label: 'Agosto', value: 8 },
-            { label: 'Setembro', value: 9 },
-            { label: 'Outubro', value: 10 },
-            { label: 'Novembro', value: 11 },
-            { label: 'Dezembro', value: 12 }
-        ]
 
-        const tipo = [
-            { label: 'Selecione...', value: '' },
-            { label: 'Receita', value: 'RECEITA' },
-            { label: 'Despesa', value: 'DESPESA' }
-        ]
+        const meses = this.service.obterListaMeses();
+
+        const tipo = this.service.obterListaTipo();
 
         return (
             <>
@@ -73,6 +61,17 @@ class ConsultaLancamentos extends Component {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="bs-component">
+
+                                <FormGroup label="Ano: *" htmlFor="inputAno">
+                                    <input
+                                        type="text"
+                                        value={this.state.ano}
+                                        onChange={e => this.setState({ ano: e.target.value })}
+                                        className="form-control"
+                                        id="exampleInputEmail1"
+                                        placeholder="Digite o Ano"
+                                    />
+                                </FormGroup>
 
                                 <FormGroup label="Descrição:" htmlFor="inputDescricao">
                                     <input
@@ -82,17 +81,6 @@ class ConsultaLancamentos extends Component {
                                         className="form-control"
                                         id="exampleInputEmail1"
                                         placeholder="Digite a Descrição"
-                                    />
-                                </FormGroup>
-
-                                <FormGroup label="Ano:" htmlFor="inputAno">
-                                    <input
-                                        type="text"
-                                        value={this.state.ano}
-                                        onChange={e => this.setState({ ano: e.target.value })}
-                                        className="form-control"
-                                        id="exampleInputEmail1"
-                                        placeholder="Digite o Ano"
                                     />
                                 </FormGroup>
 
