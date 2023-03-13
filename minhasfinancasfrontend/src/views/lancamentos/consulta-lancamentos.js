@@ -49,6 +49,14 @@ class ConsultaLancamentos extends Component {
 
     }
 
+    deletar = (id) => {
+        console.log("Deletar lancamento: " + id)
+    }
+
+    editar = (id) => {
+        console.log("Editar lancamento: " + id)
+    }
+
     render() {
 
         const meses = this.service.obterListaMeses();
@@ -116,7 +124,7 @@ class ConsultaLancamentos extends Component {
                             </div>
 
                             <div className="bs-component">
-                                <LancamentoTable lancamento={this.state.lancamentos} />
+                                <LancamentoTable lancamento={this.state.lancamentos} handleDeletar={this.deletar} handleEditar={this.editar} />
                             </div>
                         </div>
                     </div>
