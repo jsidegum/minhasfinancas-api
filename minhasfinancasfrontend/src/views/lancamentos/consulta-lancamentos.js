@@ -49,8 +49,16 @@ class ConsultaLancamentos extends Component {
 
     }
 
-    deletar = (id) => {
-        console.log("Deletar lancamento: " + id)
+    deletar = (lanc) => {
+        this.service.deletar(lanc.id)
+            .then(response => {
+                const lancamentos = this.state.lancamentos;
+                lancamentos.splice(lancamentos.indexOf(lanc), 1);
+                this.setState({ lancamentos: lancamentos });
+                alert('Lancamento ' + lanc.id + ' deletado com sucesso!')
+            }).catch(error => {
+                alert(error.response.data)
+            })
     }
 
     editar = (id) => {

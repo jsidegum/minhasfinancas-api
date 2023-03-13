@@ -14,8 +14,8 @@ class LancamentoTable extends Component {
                     <td>{lanc.mes}</td>
                     <td>{lanc.status}</td>
                     <td>
-                        <button type="button" className="btn btn-primary" onClick={e => this.props.handleEditar(lanc.id)} >Editar</button>
-                        <button type="button" className="btn btn-danger" onClick={e => this.props.handleDeletar(lanc.id)} >Deletar</button>
+                        <button type="button" className="btn btn-primary" onClick={e => this.props.handleEditar(lanc)} >Editar</button>
+                        <button type="button" className="btn btn-danger" onClick={e => this.props.handleDeletar(lanc)} >Deletar</button>
                     </td>
 
                 </tr>
