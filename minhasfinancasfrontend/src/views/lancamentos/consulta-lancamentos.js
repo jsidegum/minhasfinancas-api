@@ -4,6 +4,7 @@ import LancamentoService from '../../app/service/lancamentoService';
 import LocalStorageService from '../../app/service/localstorageService';
 import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
+import ModalDialogConfirm from '../../components/modalDialog';
 import SelectMenu from '../../components/selectMenu';
 import LancamentoTable from './lancamentoTable';
 
@@ -16,7 +17,10 @@ class ConsultaLancamentos extends Component {
         mes: '',
         ano: '',
         tipo: '',
-        lancamentos: []
+        lancamentos: [],
+        lancamentoDeletar: {},
+        askConfirm: false,
+        alertSuccess: false,
     }
 
     constructor() {
@@ -49,13 +53,18 @@ class ConsultaLancamentos extends Component {
 
     }
 
-    deletar = (lanc) => {
-        this.service.deletar(lanc.id)
+    abrirConfirmacao = (lanc) => {
+        this.setState({ askConfirm: true, lancamentoDeletar: lanc })
+    }
+
+    deletar = () => {
+
+        this.service.deletar(this.state.lancamentoDeletar.id)
             .then(response => {
                 const lancamentos = this.state.lancamentos;
-                lancamentos.splice(lancamentos.indexOf(lanc), 1);
+                lancamentos.splice(lancamentos.indexOf(this.state.lancamentoDeletar), 1);
                 this.setState({ lancamentos: lancamentos });
-                alert('Lancamento ' + lanc.id + ' deletado com sucesso!')
+                alert('Lancamento deletado com sucesso!')
             }).catch(error => {
                 alert(error.response.data)
             })
@@ -63,6 +72,10 @@ class ConsultaLancamentos extends Component {
 
     editar = (id) => {
         console.log("Editar lancamento: " + id)
+    }
+
+    cancelarDelecao = () => {
+        this.setState({ askConfirm: false, lancamentoDeletar: {} })
     }
 
     render() {
@@ -132,11 +145,21 @@ class ConsultaLancamentos extends Component {
                             </div>
 
                             <div className="bs-component">
-                                <LancamentoTable lancamento={this.state.lancamentos} handleDeletar={this.deletar} handleEditar={this.editar} />
+                                <LancamentoTable lancamento={this.state.lancamentos} handleDeletar={this.abrirConfirmacao} handleEditar={this.editar} />
                             </div>
                         </div>
                     </div>
 
+                    {/* MODAL */}
+                    <div>
+                        <ModalDialogConfirm
+                            show={this.state.askConfirm}
+                            title="Confirmar"
+                            description="Você tem certeza que deseja deletar este lancamento?"
+                            handleConfirmarAcao={this.deletar}
+                            handleCancelarAcao={this.cancelarDelecao}
+                        />
+                    </div>
 
                 </Card>
             </>
