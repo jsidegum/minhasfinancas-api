@@ -28,6 +28,9 @@ class ConsultaLancamentos extends Component {
         this.service = new LancamentoService;
     }
 
+    prepareCadastrar = () => {
+        this.props.history.push('/cadastro-lancamento')
+    }
     buscar = () => {
 
         if (this.state.ano) {
@@ -131,7 +134,7 @@ class ConsultaLancamentos extends Component {
                                     />
                                 </FormGroup>
                                 <button onClick={this.buscar} type="button" className="btn btn-success" >Buscar</button>
-                                <button type="button" className="btn btn-danger">Cadastrar</button>
+                                <button onClick={this.prepareCadastrar} type="button" className="btn btn-danger">Cadastrar</button>
 
                             </div>
                         </div>

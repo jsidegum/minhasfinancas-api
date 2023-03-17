@@ -39,8 +39,10 @@ class Home extends Component {
                         <i className="fa fa-users"></i> Cadastrar Usuário
                     </a>
                     <a className="btn btn-danger btn-lg"
-                        role="button"><i
-                            className="fa fa-users"></i> Cadastrar Lançamento
+                        role="button"
+                        href="#/cadastro-lancamento"
+                    >
+                        <i className="fa fa-users"></i> Cadastrar Lançamento
                     </a>
                 </p>
             </div>
