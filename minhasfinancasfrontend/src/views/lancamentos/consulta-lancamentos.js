@@ -124,7 +124,7 @@ class ConsultaLancamentos extends Component {
 
                                 <FormGroup label="Tipo de Lançamento:" htmlFor="inputTipo">
                                     <SelectMenu
-                                        id="inputMes"
+                                        id="inputTipo"
                                         lista={tipo}
                                         value={this.state.tipo}
                                         onChange={e => this.setState({ tipo: e.target.value })}
