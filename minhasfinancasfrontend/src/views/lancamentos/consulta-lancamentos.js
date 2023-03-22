@@ -25,7 +25,7 @@ class ConsultaLancamentos extends Component {
 
     constructor() {
         super();
-        this.service = new LancamentoService;
+        this.service = new LancamentoService();
     }
 
     prepareCadastrar = () => {
@@ -74,7 +74,7 @@ class ConsultaLancamentos extends Component {
     }
 
     editar = (id) => {
-        console.log("Editar lancamento: " + id)
+        this.props.history.push(`/cadastro-lancamento/${id}`);
     }
 
     cancelarDelecao = () => {

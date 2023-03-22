@@ -25,6 +25,11 @@ class CadastroLancamento extends Component {
         this.service = new LancamentoService;
     }
 
+    componentDidMount() {
+        const params = this.props.match.params;
+        console.log("params: ", params);
+    }
+
     validar() {
         const msgs = [];
 
