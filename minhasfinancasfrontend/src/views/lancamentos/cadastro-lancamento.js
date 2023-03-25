@@ -19,6 +19,7 @@ class CadastroLancamento extends Component {
         tipo: '',
         status: 'PENDENTE',
         usuario: null,
+        atualizando: false,
     }
 
     constructor() {
@@ -32,7 +33,7 @@ class CadastroLancamento extends Component {
             this.service
                 .obterPorId(params.id)
                 .then(response => {
-                    this.setState({ ...response.data });
+                    this.setState({ ...response.data, atualizando: true });
                 })
                 .catch(error => {
                     alert(error.response.data)
@@ -126,7 +127,7 @@ class CadastroLancamento extends Component {
         const tipo = this.service.obterListaTipo();
 
         return (
-            <Card title='Cadastro de Lançamento'>
+            <Card title={this.state.atualizando ? "Atualização de Lançamento" : "Cadastro de Lançamento"}>
                 <div className="row">
                     <div className="col-md-12">
                         <FormGroup label="Descrição: *" htmlFor="inputDescricao">
@@ -206,8 +207,12 @@ class CadastroLancamento extends Component {
 
                 <div className="row">
                     <div className="col-md-6">
-                        <button onClick={this.cadastrar} className="btn btn-success">Salvar</button>
-                        <button onClick={this.atualizar} className="btn btn-primary">Atualizar</button>
+
+                        {
+                            this.state.atualizando ?
+                                <button onClick={this.atualizar} className="btn btn-success">Atualizar</button> :
+                                <button onClick={this.cadastrar} className="btn btn-success">Salvar</button>
+                        }
                         <button onClick={this.cancelar} className="btn btn-danger">Cancelar</button>
                     </div >
                 </div >

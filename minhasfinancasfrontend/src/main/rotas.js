@@ -18,7 +18,7 @@ class Rotas extends Component {
                     <Route path="/login" component={Login} />
                     <Route path="/cadastro-usuarios" component={CadastroUsuario} />
                     <Route path="/lancamentos" component={ConsultaLancamentos} />
-                    <Route path="/cadastro-lancamento/:id" component={CadastroLancamento} />
+                    <Route path="/cadastro-lancamento/:id?" component={CadastroLancamento} />
                 </Switch>
             </HashRouter >
         )
