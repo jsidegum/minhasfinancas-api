@@ -32,6 +32,10 @@ class LancamentoService extends ApiService {
         ]
     }
 
+    obterPorId(id) {
+        return this.get(`/${id}`)
+    }
+
 
     buscar(lancamentoFiltro) {
         //http://localhost:8080/api/lancamentos?usuario=9&descricao=pagamen&mes=1&ano=2023
@@ -65,6 +69,11 @@ class LancamentoService extends ApiService {
     salvar(lancamento) {
         return this.post('/', lancamento);
     }
+
+    atualizar(lancamento) {
+        return this.put(`/${lancamento.id}`, lancamento);
+    }
+
 
 }
 

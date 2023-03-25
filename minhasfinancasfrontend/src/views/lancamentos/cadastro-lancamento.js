@@ -18,6 +18,7 @@ class CadastroLancamento extends Component {
         valor: '',
         tipo: '',
         status: 'PENDENTE',
+        usuario: null,
     }
 
     constructor() {
@@ -27,6 +28,17 @@ class CadastroLancamento extends Component {
 
     componentDidMount() {
         const params = this.props.match.params;
+        if (params.id) {
+            this.service
+                .obterPorId(params.id)
+                .then(response => {
+                    this.setState({ ...response.data });
+                })
+                .catch(error => {
+                    alert(error.response.data)
+                })
+        }
+
         console.log("params: ", params);
     }
 
@@ -74,6 +86,29 @@ class CadastroLancamento extends Component {
             this.service.salvar(lancamento)
                 .then(response => {
                     alert('Lancamento cadastrado com sucesso!');
+                    this.props.history.push('/lancamentos');
+                }).catch(error => {
+                    alert(error.response.data.message)
+                })
+        }
+    }
+
+    atualizar = () => {
+        if (this.validar()) {
+            const { descricao, ano, mes, valor, tipo, status, id, usuario } = this.state;
+            const lancamento = {
+                descricao,
+                ano,
+                mes,
+                valor,
+                tipo,
+                status,
+                id,
+                usuario
+            }
+            this.service.atualizar(lancamento)
+                .then(response => {
+                    alert('Lancamento atualizado com sucesso!');
                     this.props.history.push('/lancamentos');
                 }).catch(error => {
                     alert(error.response.data.message)
@@ -171,18 +206,9 @@ class CadastroLancamento extends Component {
 
                 <div className="row">
                     <div className="col-md-6">
-                        <button
-                            onClick={this.cadastrar}
-                            className="btn btn-success"
-                        >
-                            Salvar
-                        </button>
-                        <button
-                            onClick={this.cancelar}
-                            className="btn btn-danger"
-                        >
-                            Cancelar
-                        </button>
+                        <button onClick={this.cadastrar} className="btn btn-success">Salvar</button>
+                        <button onClick={this.atualizar} className="btn btn-primary">Atualizar</button>
+                        <button onClick={this.cancelar} className="btn btn-danger">Cancelar</button>
                     </div >
                 </div >
             </Card >
