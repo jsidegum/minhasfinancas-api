@@ -43,56 +43,42 @@ class CadastroLancamento extends Component {
         console.log("params: ", params);
     }
 
-    validar() {
-        const msgs = [];
-
-        if (!this.state.descricao) {
-            msgs.push('Por favor entre com a descrição do lancamento.');
-        }
-
-        if (!this.state.ano) {
-            msgs.push('Por favor entre com o ano do lancamento.');
-        }
-        if (!this.state.mes) {
-            msgs.push('Por favor entre com o mês do lancamento.');
-        }
-        if (!this.state.valor) {
-            msgs.push('Por favor entre com o valor do lancamento.');
-        }
-        if (!this.state.tipo) {
-            msgs.push('Por favor entre com o tipo do lancamento.');
-        }
-
-        if (msgs.length > 0) {
-            alert(msgs.join('\n'));
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     cadastrar = () => {
-        if (this.validar()) {
-            const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
-            const { descricao, ano, mes, valor, tipo, status } = this.state;
-            const lancamento = {
-                descricao,
-                ano,
-                mes,
-                valor,
-                tipo,
-                status,
-                usuario: usuarioLogado.id
-            }
-            this.service.salvar(lancamento)
-                .then(response => {
-                    alert('Lancamento cadastrado com sucesso!');
-                    this.props.history.push('/lancamentos');
-                }).catch(error => {
-                    alert(error.response.data.message)
-                })
+        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
+        const { descricao, ano, mes, valor, tipo, status } = this.state;
+        const lancamento = {
+            descricao,
+            ano,
+            mes,
+            valor,
+            tipo,
+            status,
+            usuario: usuarioLogado.id
         }
+
+        try {
+            this.service.validar(lancamento)
+        } catch (erro) {
+            const mensagens = erro.mensagens;
+            alert(mensagens.join('\n'));
+            return false;
+        }
+
+        this.service
+            .salvar(lancamento)
+            .then(response => {
+                alert('Lancamento cadastrado com sucesso!');
+                this.props.history.push('/lancamentos');
+            }).catch(error => {
+                alert(error.response.data.message)
+            })
+
     }
+
+
+
+
+
 
     atualizar = () => {
         if (this.validar()) {
