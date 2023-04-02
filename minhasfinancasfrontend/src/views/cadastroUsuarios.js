@@ -18,50 +18,33 @@ class CadastroUsuario extends React.Component {
         this.serviceSalvar = new UsuarioService();
     }
 
-    validar() {
-        const msgs = [];
-
-        if (!this.state.nome) {
-            msgs.push('Por favor entre com seu nome');
-        }
-        if (!this.state.email) {
-            msgs.push('Por favor entre com seu email');
-        } else if (!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)) {
-            msgs.push('Por favor entre com um email válido');
-        }
-        if (!this.state.senha) {
-            msgs.push('Por favor entre com sua senha');
-        }
-        if (this.state.senha !== this.state.senhaRepeticao) {
-            msgs.push('As senhas não conferem');
-        }
-        if (msgs.length > 0) {
-            alert(msgs.join('\n'));
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     cadastrar = () => {
 
-        if (this.validar()) {
+        const { nome, email, senha, senhaRepeticao } = this.state;
 
-            const usuario = {
-                nome: this.state.nome,
-                email: this.state.email,
-                senha: this.state.senha
-            }
-
-
-            this.serviceSalvar.salvar(usuario)
-                .then(response => {
-                    alert('Usuário cadastrado com sucesso!')
-                    this.props.history.push('/login');
-                }).catch(erro => {
-                    alert(erro.response.data)
-                })
+        const usuario = {
+            nome,
+            email,
+            senha,
+            senhaRepeticao
         }
+
+        try {
+            this.serviceSalvar.validar(usuario)
+        } catch (erro) {
+            const mensagens = erro.mensagens;
+            alert(mensagens.join('\n'));
+            return false;
+        }
+
+        this.serviceSalvar.salvar(usuario)
+            .then(response => {
+                alert('Usuário cadastrado com sucesso!')
+                this.props.history.push('/login');
+            }).catch(erro => {
+                alert(erro.response.data)
+            })
+
     }
 
     cancelar = () => {
