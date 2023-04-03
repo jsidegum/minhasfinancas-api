@@ -81,6 +81,24 @@ class ConsultaLancamentos extends Component {
         this.setState({ askConfirm: false, lancamentoDeletar: {} })
     }
 
+    alterarStatus = (lancamento, status) => {
+        this.service
+            .alterarStatus(lancamento.id, status)
+            .then(response => {
+                const lancamentos = this.state.lancamentos;
+                const index = lancamentos.indexOf(lancamento);
+
+                if (index !== -1) {
+                    lancamento['status'] = status;
+                    lancamentos[index] = lancamento;
+                    this.setState({ lancamento: lancamento });
+                }
+                alert('Status alterado com sucesso!')
+            }).catch(error => {
+                alert(error.response.data)
+            })
+    }
+
     render() {
 
         const meses = this.service.obterListaMeses();
@@ -148,7 +166,12 @@ class ConsultaLancamentos extends Component {
                             </div>
 
                             <div className="bs-component">
-                                <LancamentoTable lancamento={this.state.lancamentos} handleDeletar={this.abrirConfirmacao} handleEditar={this.editar} />
+                                <LancamentoTable
+                                    lancamento={this.state.lancamentos}
+                                    handleDeletar={this.abrirConfirmacao}
+                                    handleEditar={this.editar}
+                                    handleAlterarStatus={this.alterarStatus}
+                                />
                             </div>
                         </div>
                     </div>
