@@ -15,13 +15,12 @@ class LancamentoTable extends Component {
                     <td>{lanc.mes}</td>
                     <td>{lanc.status}</td>
                     <td>
+                        <button type="button" className="btn btn-success" onClick={e => this.props.handleAlterarStatus(lanc, "EFETIVADO")} disabled={lanc.status !== "PENDENTE"}>Efetivar</button>
+                        <button type="button" className="btn btn-warning" onClick={e => this.props.handleAlterarStatus(lanc, "CANCELADO")} disabled={lanc.status !== "PENDENTE"}>Cancelar</button>
                         <button type="button" className="btn btn-primary" onClick={e => this.props.handleEditar(lanc.id)} >Editar</button>
                         <button type="button" className="btn btn-danger" onClick={e => this.props.handleDeletar(lanc)}>Deletar</button>
-                        <button type="button" className="btn btn-success" onClick={e => this.props.handleAlterarStatus(lanc, "EFETIVADO")}>Efetivar</button>
-                        <button type="button" className="btn btn-danger" onClick={e => this.props.handleAlterarStatus(lanc, "CANCELADO")}>Cancelar</button>
-                        <button type="button" className="btn btn-primary" onClick={e => this.props.handleAlterarStatus(lanc, "PENDENTE")}>Pendente</button>
+                        {/* <button type="button" className="btn btn-primary" onClick={e => this.props.handleAlterarStatus(lanc, "PENDENTE")}>Pendente</button> */}
                     </td>
-
                 </tr>
             )
         })
