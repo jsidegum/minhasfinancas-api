@@ -46,9 +46,13 @@ class ConsultaLancamentos extends Component {
 
             this.service.buscar(lancamentoFiltro)
                 .then(response => {
-                    this.setState({ lancamentos: response.data })
+                    const lista = response.data;
+                    if (lista.length < 1) {
+                        alert("Nenhum lancamento encontrado com esse filtro");
+                    }
+                    this.setState({ lancamentos: lista })
                 }).catch(error => {
-                    alert(error.response.data)
+                    alert(error.lista)
                 })
         } else {
             alert('Campo Ano é obrigatório')
