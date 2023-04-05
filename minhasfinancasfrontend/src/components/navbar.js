@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import NavbarItem from "./navbarItem";
+import AuthService from "../app/service/authService";
+
+const deslogar = () => {
+    AuthService.removerUsuarioAutenticado();
+}
 
 class Navbar extends Component {
+
+
     render() {
+
         return (
             <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
                 <div className="container">
@@ -24,7 +32,7 @@ class Navbar extends Component {
                             <NavbarItem label="Home" href="#/home" />
                             <NavbarItem label="Usuários" href="#/cadastro-usuarios" />
                             <NavbarItem label="Lançamentos" href="#/lancamentos" />
-                            <NavbarItem label="Login" href="#/login" />
+                            <NavbarItem onClick={deslogar} label="Sair" href="#/login" />
                         </ul>
 
                     </div>
