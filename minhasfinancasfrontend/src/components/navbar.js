@@ -6,6 +6,10 @@ const deslogar = () => {
     AuthService.removerUsuarioAutenticado();
 }
 
+const isUsuarioAutenticado = () => {
+    return AuthService.isUsuarioAutenticado();
+}
+
 class Navbar extends Component {
 
 
@@ -29,10 +33,10 @@ class Navbar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav">
-                            <NavbarItem label="Home" href="#/home" />
-                            <NavbarItem label="Usuários" href="#/cadastro-usuarios" />
-                            <NavbarItem label="Lançamentos" href="#/lancamentos" />
-                            <NavbarItem onClick={deslogar} label="Sair" href="#/login" />
+                            <NavbarItem render={isUsuarioAutenticado()} label="Home" href="#/home" />
+                            <NavbarItem render={isUsuarioAutenticado()} label="Usuários" href="#/cadastro-usuarios" />
+                            <NavbarItem render={isUsuarioAutenticado()} label="Lançamentos" href="#/lancamentos" />
+                            <NavbarItem render={isUsuarioAutenticado()} onClick={deslogar} label="Sair" href="#/login" />
                         </ul>
 
                     </div>
