@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import LocalStorageService from '../app/service/localstorageService';
 import UsuarioService from '../app/service/usuarioService';
+import { AuthContext } from '../main/provedorAutenticacao';
 
 
 class Home extends Component {
@@ -16,7 +16,7 @@ class Home extends Component {
 
     componentDidMount() {
 
-        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
+        const usuarioLogado = this.context.usuarioAutenticado;
         this.usuarioService
             .obterSaldoPorIdUsuario(usuarioLogado.id)
             .then(response => { this.setState({ saldo: response.data }) })
@@ -49,5 +49,7 @@ class Home extends Component {
         );
     }
 }
+
+Home.contextType = AuthContext;
 
 export default Home;
