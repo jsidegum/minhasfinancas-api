@@ -1,24 +1,16 @@
 import React, { Component } from "react";
 import NavbarItem from "./navbarItem";
-import AuthService from "../app/service/authService";
+import { AuthConsumer } from "../main/provedorAutenticacao";
 
-const deslogar = () => {
-    AuthService.removerUsuarioAutenticado();
-}
-
-const isUsuarioAutenticado = () => {
-    return AuthService.isUsuarioAutenticado();
-}
 
 class Navbar extends Component {
-
 
     render() {
 
         return (
             <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
                 <div className="container">
-                    <a href="home.html" className="navbar-brand">Minhas Finanças</a>
+                    <a href="#/home" className="navbar-brand">Minhas Finanças</a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -33,10 +25,10 @@ class Navbar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav">
-                            <NavbarItem render={isUsuarioAutenticado()} label="Home" href="#/home" />
-                            <NavbarItem render={isUsuarioAutenticado()} label="Usuários" href="#/cadastro-usuarios" />
-                            <NavbarItem render={isUsuarioAutenticado()} label="Lançamentos" href="#/lancamentos" />
-                            <NavbarItem render={isUsuarioAutenticado()} onClick={deslogar} label="Sair" href="#/login" />
+                            <NavbarItem render={this.props.isUsuarioAutenticado} label="Home" href="#/home" />
+                            <NavbarItem render={this.props.isUsuarioAutenticado} label="Usuários" href="#/cadastro-usuarios" />
+                            <NavbarItem render={this.props.isUsuarioAutenticado} label="Lançamentos" href="#/lancamentos" />
+                            <NavbarItem render={this.props.isUsuarioAutenticado} onClick={this.props.deslogar} label="Sair" href="#/login" />
                         </ul>
 
                     </div>
@@ -46,4 +38,10 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default () => (
+    <AuthConsumer>
+        {(context) => (
+            <Navbar isUsuarioAutenticado={context.isAutenticado} deslogar={context.encerrarSessao} />
+        )}
+    </AuthConsumer>
+)
