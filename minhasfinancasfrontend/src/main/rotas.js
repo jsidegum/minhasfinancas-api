@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom';
-
 import Home from '../views/home';
 import Login from '../views/login';
 import CadastroUsuario from '../views/cadastroUsuarios';

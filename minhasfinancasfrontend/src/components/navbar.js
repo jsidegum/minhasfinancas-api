@@ -6,7 +6,6 @@ import { AuthConsumer } from "../main/provedorAutenticacao";
 class Navbar extends Component {
 
     render() {
-
         return (
             <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
                 <div className="container">
