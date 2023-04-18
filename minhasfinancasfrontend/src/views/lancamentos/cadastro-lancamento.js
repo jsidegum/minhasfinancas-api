@@ -24,7 +24,7 @@ class CadastroLancamento extends Component {
 
     constructor() {
         super();
-        this.service = new LancamentoService;
+        this.service = new LancamentoService();
     }
 
     componentDidMount() {
@@ -75,32 +75,35 @@ class CadastroLancamento extends Component {
 
     }
 
-
-
-
-
-
     atualizar = () => {
-        if (this.validar()) {
-            const { descricao, ano, mes, valor, tipo, status, id, usuario } = this.state;
-            const lancamento = {
-                descricao,
-                ano,
-                mes,
-                valor,
-                tipo,
-                status,
-                id,
-                usuario
-            }
-            this.service.atualizar(lancamento)
-                .then(response => {
-                    alert('Lancamento atualizado com sucesso!');
-                    this.props.history.push('/lancamentos');
-                }).catch(error => {
-                    alert(error.response.data.message)
-                })
+        const { descricao, ano, mes, valor, tipo, status, id, usuario } = this.state;
+        const lancamento = {
+            descricao,
+            ano,
+            mes,
+            valor,
+            tipo,
+            status,
+            id,
+            usuario
         }
+
+        try {
+            this.service.validar(lancamento)
+        } catch (erro) {
+            const mensagens = erro.mensagens;
+            alert(mensagens.join('\n'));
+            return false;
+        }
+        this.service
+            .atualizar(lancamento)
+            .then(response => {
+                alert('Lancamento atualizado com sucesso!');
+                this.props.history.push('/lancamentos');
+            }).catch(error => {
+                alert(error.response.data.message)
+            })
+
     }
 
     cancelar = () => {

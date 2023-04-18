@@ -3,7 +3,6 @@ import Card from '../components/card'
 import FormGroup from '../components/form-group'
 import { withRouter } from 'react-router-dom'
 import UsuarioService from '../app/service/usuarioService'
-import LocalStorageService from '../app/service/localstorageService'
 import { AuthContext } from '../main/provedorAutenticacao'
 
 class Login extends Component {
