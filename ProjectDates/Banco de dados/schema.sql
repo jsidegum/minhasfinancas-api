@@ -34,4 +34,7 @@ CREATE TABLE financas.lancamento
   data_cadastro date default now()
 );
 
+alter table financas.usuario 
+alter column senha type varchar(255);
+
 
