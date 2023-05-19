@@ -1,5 +1,5 @@
 # Postgres
-Password: postgre
+Password: postgres
 Port: 5432
 
 C:\Program Files\PostgreSQL\9.4\data
