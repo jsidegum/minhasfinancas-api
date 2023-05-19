@@ -25,7 +25,7 @@ MinhasFinancasApi é uma aplicação backend ainda em desenvolvimento para geren
 
 ### Executar Aplicação
 
-- Clone o repositório do DSList: git clone https://github.com/jsidegum/minhasfinancas-api
+- Clone o repositório do minhasfinancasapi: git clone https://github.com/jsidegum/minhasfinancas-api
 - Abra o Eclipse (ou sua IDE) e importe o projeto Maven existente.
 - Instale o plug-in "Lombok" no Eclipse e reinicie, se necessário
 - Configure o JRE instalado para utilizar o JDK 8.
