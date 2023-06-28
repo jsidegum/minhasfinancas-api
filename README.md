@@ -22,6 +22,8 @@ App: <https://github.com/jsidegum/minhasfinancas-app>
 <img src="/READMEs/images/lancamentoDelete.png" style="width:700px;"/><br/>
 <img src="/READMEs/images/lancamentoAtualizar.png" style="width:700px;"/><br/>
 <img src="/READMEs/images/lancamentoSaldo.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/consultaUsuariosPostgres.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/consultaLancamentosPostgres.png" style="width:700px;"/><br/>
 
 ## Executando o projeto back-end localmente
 
