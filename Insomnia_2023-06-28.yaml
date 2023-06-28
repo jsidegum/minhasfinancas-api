@@ -1,13 +1,13 @@
 _type: export
 __export_format: 4
-__export_date: 2023-06-20T16:00:50.554Z
-__export_source: insomnia.desktop.app:v2023.2.2
+__export_date: 2023-06-28T22:03:13.252Z
+__export_source: insomnia.desktop.app:v2023.3.0
 resources:
   - _id: req_58f11a11ece440bc8a8e74071aceb59c
     parentId: fld_d2319100171f430cad2d066942d6c514
-    modified: 1674495649764
+    modified: 1687988582951
     created: 1674495223485
-    url: "{{ _.baseUrl }}/api/lancamentos/3/atualiza-status"
+    url: "{{ _.baseUrl }}/api/lancamentos/123/atualiza-status"
     name: alterar-status
     description: ""
     method: PUT
@@ -15,13 +15,15 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"status": "CANCELADO"
+        	"status": "EFETIVADO"
         }
     parameters: []
     headers:
       - name: Content-Type
         value: application/json
-    authentication: {}
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODc5ODk5NzUsInN1YiI6ImpvaG5kb2VAZW1haWwuY29tIiwidXNlcklkIjoyOSwibm9tZSI6IkpvaG4gRG9lIiwiaG9yYUV4cGlyYWNhbyI6IjE5OjAwIn0.WVP31jo_d_FS1J4e4ypGhdpKfOxYuf-RRfinRRApVoi1oDagddZPwgjtNDEAnmyzmPC6d135yA3-akuDq9yDEA
     metaSortKey: -1674495223485
     isPrivate: false
     settingStoreCookies: true
@@ -33,9 +35,9 @@ resources:
     _type: request
   - _id: fld_d2319100171f430cad2d066942d6c514
     parentId: fld_aba1c5ef30704f4eac80f0b3d22a34a6
-    modified: 1674141513111
+    modified: 1687987274033
     created: 1674141466259
-    name: LancamentosResources
+    name: LANCAMENTOS
     description: ""
     environment: {}
     environmentPropertyOrder: null
@@ -43,9 +45,9 @@ resources:
     _type: request_group
   - _id: fld_aba1c5ef30704f4eac80f0b3d22a34a6
     parentId: wrk_a8fe7dae9b5d49d5a3c5926f9f634e3e
-    modified: 1674142002772
+    modified: 1687987264886
     created: 1672866095462
-    name: Minha Financas
+    name: MINHAS FINANCAS
     description: ""
     environment:
       baseUrl: http://localhost:8080
@@ -64,7 +66,7 @@ resources:
     _type: workspace
   - _id: req_459922ab1f794702921447fd21a1cf22
     parentId: fld_d2319100171f430cad2d066942d6c514
-    modified: 1678454904697
+    modified: 1687988750579
     created: 1674144723008
     url: "{{ _.baseUrl }}/api/lancamentos"
     name: filtrar
@@ -74,52 +76,25 @@ resources:
     parameters:
       - id: pair_fb9a55009f004160a0106b9e683e36b8
         name: usuario
-        value: "9"
+        value: "29"
         description: ""
       - id: pair_d9e11fcad0bd4a1ca4d4b4dfcc1c7c41
         name: descricao
-        value: pagamen
+        value: ""
         description: ""
       - id: pair_5bbf2c6394234cf4ba7dd3f5a88ec11d
         name: mes
-        value: "1"
+        value: ""
         description: ""
       - id: pair_da6a908839b84eefaf1b4c7dc5f97ad6
         name: ano
         value: "2023"
         description: ""
     headers: []
-    authentication: {}
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODc5ODk5NzUsInN1YiI6ImpvaG5kb2VAZW1haWwuY29tIiwidXNlcklkIjoyOSwibm9tZSI6IkpvaG4gRG9lIiwiaG9yYUV4cGlyYWNhbyI6IjE5OjAwIn0.WVP31jo_d_FS1J4e4ypGhdpKfOxYuf-RRfinRRApVoi1oDagddZPwgjtNDEAnmyzmPC6d135yA3-akuDq9yDEA
     metaSortKey: -1674144723008
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: req_e94623ba0b084ab79929f9f745f60d42
-    parentId: fld_d2319100171f430cad2d066942d6c514
-    modified: 1678454432340
-    created: 1678119424337
-    url: "{{ _.baseUrl }}/api/lancamentos"
-    name: filtrar2
-    description: ""
-    method: GET
-    body: {}
-    parameters:
-      - id: pair_fb9a55009f004160a0106b9e683e36b8
-        name: usuario
-        value: "9"
-        description: ""
-      - id: pair_d9e11fcad0bd4a1ca4d4b4dfcc1c7c41
-        name: descricao
-        value: ""
-        description: ""
-    headers: []
-    authentication: {}
-    metaSortKey: -1674144672520.5
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -130,9 +105,9 @@ resources:
     _type: request
   - _id: req_4108acdbd63f47949bc3d0216edbbcea
     parentId: fld_d2319100171f430cad2d066942d6c514
-    modified: 1674144712061
+    modified: 1687988232905
     created: 1674144622033
-    url: "{{ _.baseUrl }}/api/lancamentos/1"
+    url: "{{ _.baseUrl }}/api/lancamentos/121"
     name: delete
     description: ""
     method: DELETE
@@ -143,7 +118,9 @@ resources:
     headers:
       - name: Content-Type
         value: application/json
-    authentication: {}
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODc5ODk5NzUsInN1YiI6ImpvaG5kb2VAZW1haWwuY29tIiwidXNlcklkIjoyOSwibm9tZSI6IkpvaG4gRG9lIiwiaG9yYUV4cGlyYWNhbyI6IjE5OjAwIn0.WVP31jo_d_FS1J4e4ypGhdpKfOxYuf-RRfinRRApVoi1oDagddZPwgjtNDEAnmyzmPC6d135yA3-akuDq9yDEA
     metaSortKey: -1674144622033
     isPrivate: false
     settingStoreCookies: true
@@ -155,9 +132,9 @@ resources:
     _type: request
   - _id: req_40017598998648cf86f12f68313e7f04
     parentId: fld_d2319100171f430cad2d066942d6c514
-    modified: 1674144509364
+    modified: 1687989007867
     created: 1674144328028
-    url: "{{ _.baseUrl }}/api/lancamentos/1"
+    url: "{{ _.baseUrl }}/api/lancamentos/124"
     name: atualizar
     description: ""
     method: PUT
@@ -165,20 +142,22 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"descricao": "Salario",
-        	"mes": 1,
-        	"ano": 2023,
-        	"valor": 1500,
-        	"tipo": "RECEITA",
-        	"status": "PENDENTE",
-        	"usuario": 9,
-        	"dataCadastro": null
+        		"descricao": "Agua",
+        		"mes": 6,
+        		"ano": 2023,
+        		"valor": 75,
+        		"tipo": "DESPESA",
+        		"status": "PENDENTE",
+        		"usuario": 	29,
+        		"dataCadastro": null
         }
     parameters: []
     headers:
       - name: Content-Type
         value: application/json
-    authentication: {}
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODc5ODk5NzUsInN1YiI6ImpvaG5kb2VAZW1haWwuY29tIiwidXNlcklkIjoyOSwibm9tZSI6IkpvaG4gRG9lIiwiaG9yYUV4cGlyYWNhbyI6IjE5OjAwIn0.WVP31jo_d_FS1J4e4ypGhdpKfOxYuf-RRfinRRApVoi1oDagddZPwgjtNDEAnmyzmPC6d135yA3-akuDq9yDEA
     metaSortKey: -1674144328028
     isPrivate: false
     settingStoreCookies: true
@@ -190,7 +169,7 @@ resources:
     _type: request
   - _id: req_d5febc5d717348f9a3aa98fa90d4f7a3
     parentId: fld_d2319100171f430cad2d066942d6c514
-    modified: 1681834693570
+    modified: 1687988424774
     created: 1674141476914
     url: "{{ _.baseUrl }}/api/lancamentos"
     name: salvar
@@ -200,18 +179,20 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"descricao": "9",
-        	"mes": 1,
+        	"descricao": "Agua",
+        	"mes": 6,
         	"ano": 2023,
-        	"valor": 1900,
+        	"valor": 50,
         	"tipo": "DESPESA",
-        	"usuario": 9
+        	"usuario": 29
         }
     parameters: []
     headers:
       - name: Content-Type
         value: application/json
-    authentication: {}
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODc5ODk2MzksInN1YiI6ImpvaG5kb2VAZW1haWwuY29tIiwidXNlcklkIjoyOSwibm9tZSI6IkpvaG4gRG9lIiwiaG9yYUV4cGlyYWNhbyI6IjE5OjAwIn0.9NODJttoXzMwhfIOeZ9X55u8wmss7-BcGMOFPQTRJ8cq5SRyviWEXSGGH4GECpFvLOVd_HyPB_ykdqTfoH3O6w
     metaSortKey: -1674141476914
     isPrivate: false
     settingStoreCookies: true
@@ -223,9 +204,9 @@ resources:
     _type: request
   - _id: req_d35e4b6481fc421d978c207b70a804ed
     parentId: fld_c056f73a0c144e70a766faa6616f810e
-    modified: 1687276658548
+    modified: 1687988190637
     created: 1674495700680
-    url: "{{ _.baseUrl }}/api/usuarios/26/saldo"
+    url: "{{ _.baseUrl }}/api/usuarios/29/saldo"
     name: saldo
     description: ""
     method: GET
@@ -243,11 +224,11 @@ resources:
         value: Bearer
           eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODcyNzgyNzgsInN1YiI6InRlc3RlNEBlbWFpbC5jb20iLCJub21lIjoiVGVzdGU0IiwiaG9yYUV4cGlyYWNhbyI6IjEzOjAwIn0.dBgWEajtNDJKNHZhfvfIQYvtI-HfENjavGnX7Ih4ebhC-wArVwL_9WsmnoBZaJgCLbEVSX_fKS_7y0c4J7f-kA
         description: ""
-        disabled: false
+        disabled: true
     authentication:
       type: bearer
-      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODcyNzgyNzgsInN1YiI6InRlc3RlNEBlbWFpbC5jb20iLCJub21lIjoiVGVzdGU0IiwiaG9yYUV4cGlyYWNhbyI6IjEzOjAwIn0.dBgWEajtNDJKNHZhfvfIQYvtI-HfENjavGnX7Ih4ebhC-wArVwL_9WsmnoBZaJgCLbEVSX_fKS_7y0c4J7f-kA
-      disabled: true
+      token: eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2ODc5ODk5NzUsInN1YiI6ImpvaG5kb2VAZW1haWwuY29tIiwidXNlcklkIjoyOSwibm9tZSI6IkpvaG4gRG9lIiwiaG9yYUV4cGlyYWNhbyI6IjE5OjAwIn0.WVP31jo_d_FS1J4e4ypGhdpKfOxYuf-RRfinRRApVoi1oDagddZPwgjtNDEAnmyzmPC6d135yA3-akuDq9yDEA
+      disabled: false
     metaSortKey: -1674495700680
     isPrivate: false
     settingStoreCookies: true
@@ -259,9 +240,9 @@ resources:
     _type: request
   - _id: fld_c056f73a0c144e70a766faa6616f810e
     parentId: fld_aba1c5ef30704f4eac80f0b3d22a34a6
-    modified: 1672866111049
+    modified: 1687987243775
     created: 1672866111049
-    name: UsuarioResource
+    name: USUARIOS
     description: ""
     environment: {}
     environmentPropertyOrder: null
@@ -269,18 +250,18 @@ resources:
     _type: request_group
   - _id: req_3b32155067a1493abcf63a6fd3a7c3d1
     parentId: fld_c056f73a0c144e70a766faa6616f810e
-    modified: 1687090647075
+    modified: 1687987837353
     created: 1673974317630
     url: http://localhost:8080/api/usuarios/autenticar
-    name: Autenticar
+    name: autenticar
     description: ""
     method: POST
     body:
       mimeType: application/json
       text: |-
         {
-        	"email": "teste4@email.com",
-        	"senha": "teste"
+        	"email": "johndoe@email.com",
+        	"senha": "Pass123"
         }
     parameters: []
     headers:
@@ -289,9 +270,9 @@ resources:
     authentication:
       type: basic
       useISO88591: false
-      disabled: false
-      username: teste4@email.com
-      password: teste
+      disabled: true
+      username: janedoe@email.com
+      password: "12345678"
     metaSortKey: -1673974317630
     isPrivate: false
     settingStoreCookies: true
@@ -303,7 +284,7 @@ resources:
     _type: request
   - _id: req_8e78e854cf7348c995615df447285b2a
     parentId: fld_c056f73a0c144e70a766faa6616f810e
-    modified: 1687090600715
+    modified: 1687987318280
     created: 1672866239702
     url: http://localhost:8080/api/usuarios
     name: salvarUsuario
@@ -313,9 +294,9 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"nome": "Teste4",
-        	"email": "teste4@email.com",
-        	"senha": "teste"
+        	"nome": "John Doe",
+        	"email": "johndoe@email.com",
+        	"senha": "Pass123"
         }
     parameters: []
     headers:

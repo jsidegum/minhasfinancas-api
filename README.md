@@ -13,6 +13,16 @@ App: <https://github.com/jsidegum/minhasfinancas-app>
 - Postgress
 - Json web token
 
+## Screenshots
+
+<img src="/READMEs/images/usuarioSalvar.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/usuarioAutenticar.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/lancamentoSalvar.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/lancamentoSalvarToken.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/lancamentoDelete.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/lancamentoAtualizar.png" style="width:700px;"/><br/>
+<img src="/READMEs/images/lancamentoSaldo.png" style="width:700px;"/><br/>
+
 ## Executando o projeto back-end localmente
 
 ### Pré-requisitos
